@@ -1,11 +1,5 @@
 pipeline {
     agent any
-    tools{
-        jdk 'jdk17'
-    }
-    environment {
-        SCANNER_HOME=tool 'sonarqubescanner' 
-
      options {
         timeout(time: 10, unit: 'MINUTES')
      }
@@ -24,6 +18,13 @@ pipeline {
         }
         // run sonarqube test
         stage('Run Sonarqube') {
+            tools{
+                jdk 'jdk17'
+            }
+            environment {
+                SCANNER_HOME=tool 'sonarqubescanner' 
+            }
+
             steps {
               withSonarQubeEnv(credentialsId: 'jenkins-sonar', installationName: 'sq1') {
                 sh "${scannerHome}/bin/sonar-scanner"
