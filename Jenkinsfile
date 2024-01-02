@@ -1,8 +1,5 @@
 pipeline {
     agent any 
-    tools{
-        jdk 'jdk17'
-    }
 
      options {
         timeout(time: 10, unit: 'MINUTES')
