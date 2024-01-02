@@ -14,16 +14,16 @@ pipeline {
     stages { 
         stage('SCM Checkout') {
             steps{
-           git branch: 'main', url: 'https://github.com/ooghenekaro/nodejs-webapp-2.git'
+           git branch: 'main', url: 'https://github.com/lauraslim/nodejs-webapp.git'
             }
         }
         // run sonarqube test
         stage('Run Sonarqube') {
             environment {
-                scannerHome = tool 'ibt-sonarqube';
+                scannerHome = tool 'sq1';
             }
             steps {
-              withSonarQubeEnv(credentialsId: 'ibt-sonar', installationName: 'IBT sonarqube') {
+              withSonarQubeEnv(credentialsId: 'jenkins-sonar', installationName: 'sq1') {
                 sh "${scannerHome}/bin/sonar-scanner"
               }
             }
