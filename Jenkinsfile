@@ -20,7 +20,7 @@ pipeline {
         // run sonarqube test
         stage('Run Sonarqube') {
             environment {
-                scannerHome = tool 'sq1';
+                scannerHome = tool 'sonarqubescanner';
             }
             steps {
               withSonarQubeEnv(credentialsId: 'jenkins-sonar', installationName: 'sq1') {
