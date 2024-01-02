@@ -1,5 +1,6 @@
 pipeline {
-    agent any
+    agent any 
+
      options {
         timeout(time: 10, unit: 'MINUTES')
      }
@@ -13,18 +14,14 @@ pipeline {
     stages { 
         stage('SCM Checkout') {
             steps{
-           git branch: 'main', url: 'https://github.com/lauraslim/nodejs-webapp.git'
+           git branch: 'main', url: 'https://github.com/ooghenekaro/nodejs-webapp-2.git'
             }
         }
         // run sonarqube test
         stage('Run Sonarqube') {
-            tools{
-                jdk 'jdk17'
-            }
             environment {
-                SCANNER_HOME=tool 'sonarqubescanner' 
+                scannerHome = tool 'sonarqubescanner';
             }
-
             steps {
               withSonarQubeEnv(credentialsId: 'jenkins-sonar', installationName: 'sq1') {
                 sh "${scannerHome}/bin/sonar-scanner"
