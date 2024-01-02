@@ -24,7 +24,7 @@ pipeline {
             }
             steps {
               withSonarQubeEnv(credentialsId: 'jenkins-sonar', installationName: 'sq1') {
-                sh "${scannerHome}/bin/sonar-scanner"
+                sh "${scannerHome}/bin/sonarqubescanner"
               }
             }
         }
