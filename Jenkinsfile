@@ -23,8 +23,8 @@ pipeline {
                 scannerHome = tool 'sq1';
             }
             steps {
-              withSonarQubeEnv(credentialsId: 'jenkins-sonar-acr', installationName: 'sq1') {
-                sonar-scanner.bat -D"sonar.projectKey=acr-project" -D"sonar.sources=." 
+              withSonarQubeEnv(credentialsId: 'jenkins-sonar-acr', installationName: 'sonarqube') {
+                sonar-scanner.bat -D"sonar.projectKey=acr-project"
             }
         }
        // Building Docker Image 
