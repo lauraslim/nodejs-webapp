@@ -24,8 +24,8 @@ pipeline {
                 scannerHome = tool 'sonarqubescanner';
             }
             steps {
-              withSonarQubeEnv(credentialsId: 'jenkins-sonar-acr', installationName: 'sonarqube') {
-                bat"\"${scannerHome}\\bin\\sonar-scanner.bat\"""
+                withSonarQubeEnv(credentialsId: 'jenkins-sonar-acr', installationName: 'sonarqube') {
+                    bat"\"${scannerHome}\\bin\\sonar-scanner.bat\"""
               
               }
             }
