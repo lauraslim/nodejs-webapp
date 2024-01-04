@@ -1,5 +1,6 @@
 pipeline {
     agent any 
+    tools {nodejs "nodejs"}
 
      options {
         timeout(time: 10, unit: 'MINUTES')
@@ -20,7 +21,7 @@ pipeline {
         // run sonarqube test
         stage('Run Sonarqube') {
             environment {
-                scannerHome = tool 'sq1';
+                scannerHome = tool 'sonarqubescanner';
             }
             steps {
               withSonarQubeEnv(credentialsId: 'jenkins-sonar-acr', installationName: 'sonarqube') {
