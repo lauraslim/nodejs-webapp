@@ -9,12 +9,12 @@ pipeline {
     registyUrl = "dianeacr.azurecr.io"
     IMAGE_NAME = "nodejswebapp"
     IMAGE_TAG = "v1.0.0"
-    registryCredential  = "jenkins-acr"
+    registryCredential  = "acr-registry"
     }
     stages { 
         stage('SCM Checkout') {
             steps{
-           git branch: 'main', url: 'https://github.com/lauraslim/nodejs-webapp.git'
+           git branch: 'main', url: 'https://github.com/ooghenekaro/nodejs-webapp-2.git'
             }
         }
         // run sonarqube test
@@ -25,6 +25,7 @@ pipeline {
             steps {
               withSonarQubeEnv(credentialsId: 'jenkins-sonar-acr', installationName: 'sonarqube') {
                 sh "${scannerHome}/bin/sonar-scanner"
+              }
             }
         }
        // Building Docker Image 
