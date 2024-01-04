@@ -24,8 +24,10 @@ pipeline {
                 scannerHome = tool 'sonarqubescanner';
             }
             steps {
-              withSonarQubeEnv(credentialsId: 'jenkins-sonar-acr', installationName: 'sonarqube') {
-                sh "${scannerHome}/bin/sonar-scanner"
+              withSonarQubeEnv('sonarqube-server') {
+                  sh" ${SCANNER_HOME**}/bin/sonar-scanner \
+                  -Dsonar.projectKey=acr-project \
+                  -Dsonar.sources=. "
               }
             }
         }
