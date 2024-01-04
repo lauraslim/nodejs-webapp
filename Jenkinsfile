@@ -24,8 +24,7 @@ pipeline {
             }
             steps {
               withSonarQubeEnv(credentialsId: 'jenkins-sonar-acr', installationName: 'sq1') {
-                bat "${scannerHome}/bin/sonar-scanner"
-              }
+                sonar-scanner.bat -D"sonar.projectKey=acr-project" -D"sonar.sources=." -D"sonar.host.url=http://localhost:9000"
             }
         }
        // Building Docker Image 
