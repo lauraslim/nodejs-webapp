@@ -1,6 +1,5 @@
 pipeline {
     agent any 
-    tools {nodejs "nodejs"}
 
      options {
         timeout(time: 10, unit: 'MINUTES')
@@ -15,7 +14,7 @@ pipeline {
     stages { 
         stage('SCM Checkout') {
             steps{
-           git branch: 'main', url: 'https://github.com/ooghenekaro/nodejs-webapp-2.git'
+           git branch: 'main', url: 'https://github.com/ooghenekaro/nodejs-webapp.git'
             }
         }
         // run sonarqube test
@@ -24,9 +23,8 @@ pipeline {
                 scannerHome = tool 'sonarscanner';
             }
             steps {
-                withSonarQubeEnv('sonarserver') {
-                    bat '''${scannerHome}\\bin\\sonar-scanner.bat\'''
-              
+              withSonarQubeEnv(credentialsId: 'sonartoken', installationName: 'sonarserver') {
+                sh "${scannerHome}/bin/sonar-scanner"
               }
             }
         }
