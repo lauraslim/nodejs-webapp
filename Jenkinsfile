@@ -11,20 +11,22 @@ pipeline {
     IMAGE_TAG = "v1.0.0"
     registryCredential  = "acr-registry"
     }
-    stages { 
-        stage('SCM Checkout') {
-            steps{
-           git branch: 'main', url: 'https://github.com/lauraslim/nodejs-webapp.git'
+    stages {
+	stage('checkout code') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/lauraslim/nodejs-webapp.git']])
             }
         }
+
+
         // run sonarqube test
         stage('Run Sonarqube') {
             environment {
-                scannerHome = tool 'sonarscanner';
+                scannerHome = tool 'scanner';
             }
             steps {
-              withSonarQubeEnv(credentialsId: 'sonartoken', installationName: 'sonarserver') {
-                sh "${scannerHome}/bin/sonar-scanner"
+              withSonarQubeEnv(credentialsId: 'sonar-cred', installationName: 'sonar') {
+                bat "${scannerHome}/bin/sonar-scanner"
               }
             }
         }
