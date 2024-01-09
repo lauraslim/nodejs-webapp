@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    tools {
-        docker "docker24.0.7"
-    }
 
      options {
         timeout(time: 10, unit: 'MINUTES')
