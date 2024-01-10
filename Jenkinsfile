@@ -26,7 +26,7 @@ pipeline {
             }
             steps {
               withSonarQubeEnv(credentialsId: 'sonar-cred', installationName: 'sonar') {
-                bat "${scannerHome}/bin/sonar-scanner"
+                sh "${scannerHome}/bin/sonar-scanner"
               }
             }
         }
